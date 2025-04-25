@@ -1,0 +1,64 @@
+
+Проект: Распознавание лиц с использованием Python
+
+1. Описание проекта:
+Распознавание лиц — это технология, основанная на использовании искусственного интеллекта для идентификации или верификации личности по её лицу. Проект демонстрирует базовую реализацию распознавания лиц на Python с использованием библиотек `face_recognition` и `opencv-python`.
+
+2. Используемые технологии:
+- Язык программирования: Python 3
+- Библиотеки:
+  - face_recognition
+  - opencv-python
+  - numpy
+
+3. Установка зависимостей:
+pip install face_recognition opencv-python numpy
+
+4. Распознавание лиц на изображении:
+
+```python
+import face_recognition
+import cv2
+
+image = face_recognition.load_image_file("your_image.jpg")
+rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+face_locations = face_recognition.face_locations(rgb_image)
+
+for top, right, bottom, left in face_locations:
+    cv2.rectangle(rgb_image, (left, top), (right, bottom), (0, 255, 0), 2)
+
+cv2.imshow("Распознанные лица", rgb_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+
+5. Распознавание лиц с веб-камеры:
+
+```python
+import face_recognition
+import cv2
+
+video_capture = cv2.VideoCapture(0)
+
+while True:
+    ret, frame = video_capture.read()
+    rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    face_locations = face_recognition.face_locations(rgb_frame)
+
+    for top, right, bottom, left in face_locations:
+        cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 2)
+
+    cv2.imshow('Видео', frame)
+
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+video_capture.release()
+cv2.destroyAllWindows()
+```
+
+6. Презентация проекта:
+- Введение: применение технологии
+- Технологии: библиотеки и язык
+- Демонстрация: изображения и видео
+- Заключение: возможности расширения
